@@ -1,21 +1,17 @@
 
 <!DOCTYPE html>
 <html>
-
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
-		<title>Physics Engine Example</title>
-		<link rel="stylesheet" type="text/css" href="ww.css" >
-		<script type="text/javascript" src="physics.js"></script>
-
-	</head>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+        <title>Physics Engine Example</title>
+        <link rel="stylesheet" type="text/css" href="ww.css" >
+        <script type="text/javascript" src="physics.js"></script>
     <style>
         body{
-            overflow-x: no-display;
-            overflow-y: no-display;
+            overflow: hidden;
         }
-        
     </style>
+	</head>
 	<body>
 	<script type="text/javascript">
         //
@@ -41,8 +37,8 @@ loadScript('tween.js');
 
 Physics({ timestep: 2 }, function (world) {
 
-    var viewWidth = window.innerWidth
-        ,viewHeight = window.innerHeight
+    var viewWidth = window.innerWidth - 10
+        ,viewHeight = window.innerHeight - 10
         // bounds of the window
         ,viewportBounds = Physics.aabb(0, 0, viewWidth, viewHeight)
         ,edgeBounce
@@ -102,6 +98,21 @@ Physics({ timestep: 2 }, function (world) {
         }
     });
 
+    projectile2 = Physics.body('circle', {
+        x: -20
+        ,y: viewHeight - 150
+        ,vx: 2
+        ,mass: 4
+        ,radius: 20
+        ,restitution: 0.99
+        ,angularVelocity: 0
+        ,label: 'bullet'
+        ,styles: {
+            fillStyle: '#d33682'
+            ,angleIndicator: '#751b4b'
+        }
+    });
+    
     // squares
     var squares = [];
     for ( var i = 0, l = 24; i < l; ++i ){
@@ -123,7 +134,7 @@ Physics({ timestep: 2 }, function (world) {
     }
 
     world.add( squares );
-
+    world.add( projectile2 );
     setTimeout(function(){
 
         world.add( projectile );
