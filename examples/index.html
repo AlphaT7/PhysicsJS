@@ -113,6 +113,21 @@ Physics({ timestep: 2 }, function (world) {
         }
     });
     
+    projectile3 = Physics.body('circle', {
+        x: -20
+        ,y: viewHeight - 200
+        ,vx: 2
+        ,mass: 4
+        ,radius: 20
+        ,restitution: 0.99
+        ,angularVelocity: 0
+        ,label: 'bullet'
+        ,styles: {
+            fillStyle: '#d33682'
+            ,angleIndicator: '#751b4b'
+        }
+    });
+    
     // squares
     var squares = [];
     for ( var i = 0, l = 24; i < l; ++i ){
@@ -135,6 +150,7 @@ Physics({ timestep: 2 }, function (world) {
 
     world.add( squares );
     world.add( projectile2 );
+    world.add( projectile3 );
     setTimeout(function(){
 
         world.add( projectile );
